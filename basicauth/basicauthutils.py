@@ -1,8 +1,16 @@
 from __future__ import absolute_import
 import base64
 import binascii
-from urllib import unquote_plus
-from itertools import imap
+try:
+    from urllib import unquote_plus
+except ImportError:
+    # Probably running on python3
+    from urllib.parse import unquote_plus
+
+try:
+    from itertools import imap
+except ImportError:
+    imap = map
 
 
 def extract_basicauth(authorization_header, encoding=u'utf-8'):
