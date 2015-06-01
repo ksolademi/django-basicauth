@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from django.conf import settings
 from django.http import HttpResponse
 
@@ -7,8 +8,8 @@ class HttpResponseUnauthorized(HttpResponse):
 
     def __init__(self):
         super(HttpResponseUnauthorized, self).__init__(
-            """<html><head><title>Basic auth required</title></head>
+            u"""<html><head><title>Basic auth required</title></head>
                <body><h1>Authorization Required</h1></body></html>""",
         )
-        realm = getattr(settings, 'BASICAUTH_REALM', 'Secure resource')
-        self['WWW-Authenticate'] = 'Basic realm="{}"'.format(realm)
+        realm = getattr(settings, u'BASICAUTH_REALM', u'Secure resource')
+        self[u'WWW-Authenticate'] = u'Basic realm="{}"'.format(realm)

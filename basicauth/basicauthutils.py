@@ -1,16 +1,18 @@
+from __future__ import absolute_import
 import base64
 import binascii
-from urllib.parse import unquote_plus
+from urllib import unquote_plus
+from itertools import imap
 
 
-def extract_basicauth(authorization_header, encoding='utf-8'):
-    splitted = authorization_header.split(' ')
+def extract_basicauth(authorization_header, encoding=u'utf-8'):
+    splitted = authorization_header.split(u' ')
     if len(splitted) != 2:
         return None
 
     auth_type, auth_string = splitted
 
-    if 'basic' != auth_type.lower():
+    if u'basic' != auth_type.lower():
         return None
 
     try:
@@ -22,10 +24,10 @@ def extract_basicauth(authorization_header, encoding='utf-8'):
     except UnicodeDecodeError:
         return None
 
-    splitted = auth_string_decoded.split(':')
+    splitted = auth_string_decoded.split(u':')
 
     if len(splitted) != 2:
         return None
 
-    username, password = map(unquote_plus, splitted)
+    username, password = imap(unquote_plus, splitted)
     return username, password
