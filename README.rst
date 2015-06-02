@@ -40,5 +40,7 @@ Usage
 Settings
 ========
 
-* ``BASICAUTH_USERS`` (required): Dictionary including keys as username and values as passwords.
+* ``BASICAUTH_USE_DICT``: Use BASICAUTH_USERS for authentication.
+* ``BASICAUTH_USERS``: Dictionary including keys as username and values as passwords.
+* ``BASICAUTH_USE_DJANGO_AUTH``: Use django's builtin authentication.
 * ``BASICAUTH_REALM``: realm string, default is "Secure resource".
