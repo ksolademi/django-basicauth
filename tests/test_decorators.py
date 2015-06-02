@@ -38,3 +38,15 @@ class TestBasicAuthDecorator(TestCase):
         req = self.rf.get("/", HTTP_AUTHORIZATION="Basic aW52YWxpZDppbnZhbGlk")
         res = self._callFUT(req)
         self.assertEqual(res.status_code, 401)
+
+    @override_settings(
+        BASICAUTH_USE_DJANGO_AUTH=True,
+    )
+    def test__django_auth_used(self):
+        req = self.rf.get("/", HTTP_AUTHORIZATION="Basic aW52YWxpZDppbnZhbGlk")
+        with mock.patch('basicauth.decorators.authenticate'),\
+             mock.patch('basicauth.decorators.login') as mocked_login:
+            res = self._callFUT(req)
+
+        self.assertTrue(mocked_login.called)
+        self.assertEqual(res, "Called")
