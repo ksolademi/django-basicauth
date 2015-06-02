@@ -8,4 +8,8 @@ settings.configure(
         "NAME": ":memory:"
     }}
 )
-django.setup()
+try:
+    django.setup()
+except AttributeError:
+    from django.core.management import setup_environ
+    setup_environ(settings)

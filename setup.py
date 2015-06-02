@@ -15,7 +15,7 @@ setup(
     description="Basic auth utilities for Django.",
     long_description=README + '\n\n' + CHANGES,
     packages=['basicauth'],
-    install_requires=['Django>=1.7,<1.9'],
+    install_requires=['Django>=1.4,<1.9'],
     include_package_data=True,
     test_suite="tests",
     zip_safe=False,

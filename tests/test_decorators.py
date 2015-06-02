@@ -1,10 +1,17 @@
+try:
+    from unittest import mock
+except ImportError:
+    import mock
+
 from django.test import TestCase
 from django.test import RequestFactory
 from django.test.utils import override_settings
 
 
 @override_settings(
-    BASICAUTH_USERS={"username": "password"}
+    BASICAUTH_USERS={"username": "password"},
+    BASICAUTH_USE_DJANGO_AUTH=False,
+    BASICAUTH_USE_DICT=True
 )
 class TestBasicAuthDecorator(TestCase):
     rf = RequestFactory()
